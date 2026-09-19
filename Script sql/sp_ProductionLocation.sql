@@ -15,7 +15,7 @@ END;
 GO
 
 
--- Usada por la función buscarLocationPorNombreJoin, mediante la dirección GET /api/location/nombre/:name
+-- Usada por la función buscarLocationPorNombreJoin, mediante la dirección GET /api/location/name/:name
 CREATE OR ALTER PROCEDURE dbo.sp_ProductionLocation_ProductionProductInventory_ProductionProduct_buscarPorNombre
     @Name NVARCHAR(50)
 as
