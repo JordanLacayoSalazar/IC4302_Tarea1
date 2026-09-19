@@ -8,6 +8,12 @@
 
 ### Enlace del video: https://youtu.be/Pe6xdezzvvw
 
+<br>
+
+---
+
+**Importante:** La API requiere el archivo .env para funcionar correctamente. Por seguridad, este archivo no se incluye en este repositorio. Antes de ejecutar la aplicación, se debe crear el archivo .env en la raíz de la carpeta Codigo y colocar las credenciales. Para más información, vaya a las secciones **Instalación de los programas: Node.js y npm, parte 3.7** y **Configuración de Servicios: SQL Server 2025, parte 5.**
+
 ---
 
 <br>
@@ -121,7 +127,7 @@ Please run 'sudo /opt/mssql/bin/mssql-conf setup'
 to complete the setup of Microsoft SQL Server
 +--------------------------------------------------------------+
 ```
-Está solicitando que se debe ejecutar ese comando de configuración inicial para terminar de instalar correctamente SQL Server. Para ver la continuación del procedimiento para la configuración, vaya a la sección **Configuración de Servicios: SQL Server 2025, sección 1.**
+Está solicitando que se debe ejecutar ese comando de configuración inicial para terminar de instalar correctamente SQL Server. Para ver la continuación del procedimiento para la configuración, vaya a la sección **Configuración de Servicios: SQL Server 2025, parte 1.**
 <br><br>
 
 ---
@@ -249,7 +255,7 @@ Para que la aplicación pueda cargar las variables almacenadas en el archivo .en
 ```bash
 npm install dotenv
 ```
-Para ver la continuación del procedimiento de la creación y uso del archivo .env, vaya a la sección **Configuración de Servicios: SQL Server 2025, sección 5.**
+Para ver la continuación del procedimiento de la creación y uso del archivo .env, vaya a la sección **Configuración de Servicios: SQL Server 2025, parte 5.**
 <br><br><br>
 
 
