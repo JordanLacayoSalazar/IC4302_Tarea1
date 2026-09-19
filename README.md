@@ -574,9 +574,9 @@ Se utiliza el método POST en la siguiente ruta:
 En el cuerpo de la solicitud se envían los datos en formato JSON. Ejemplo:
 ```json
 {
-    "Name": "Almacén Guápiles",
-    "CostRate": 10.50,
-    "Availability": 95.00
+    "name": "Almacén Guápiles",
+    "costRate": 10.50,
+    "availability": 95.00
 }
 ```
 <br>
@@ -589,9 +589,9 @@ El LocationID indicado en la URL determina el registro que será modificado.
 Los nuevos valores se envían en formato JSON. Ejemplo:
 ```json
 {
-    "Name": "Almacén Limón Centro",
-    "CostRate": 12.50,
-    "Availability": 90.00
+    "name": "Almacén Limón Centro",
+    "costRate": 12.50,
+    "availability": 90.00
 }
 ```
 <br>
