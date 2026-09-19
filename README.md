@@ -18,7 +18,7 @@ Para la realización de la tarea, se tomó la decisión de utilizar Ubuntu, el c
 
 En el subsistema, se instalará Node.js junto con Microsoft SQL Server 2025, usando la base de datos de ejemplo AdventureWorks provista por Microsoft ([enlace de descarga de AdventureWorks2025](https://github.com/Microsoft/sql-server-samples/releases/download/adventureworks/AdventureWorks2025.bak)). También es necesario instalar npm (Node Package Manager) para poder descargar las librerías que necesita la API.
 
-Para lograr crear una API RESTful (que debe los prinicipios de REST) con Node.js, se empleará el framework Express para atender las solicitudes HTTP y el controlador mssql para comunicarse con SQL Server.
+Para lograr crear una API RESTful con Node.js, se empleará el framework Express para atender las solicitudes HTTP y el controlador mssql para comunicarse con SQL Server.
 
 Las operaciones de la API que se creará se realizarán mediante procedimientos almacenados (Stored Procedures) en SQL Server. Node.js será el encargado de ejecutar la API, recibiendo y procesando las solicitudes. De esta manera, la API permitirá realizar las operaciones Create, Read, Update y Delete mediante los métodos POST, GET, PUT y DELETE, respectivamente.
 
@@ -122,7 +122,7 @@ to complete the setup of Microsoft SQL Server
 +--------------------------------------------------------------+
 ```
 Está solicitando que se debe ejecutar ese comando de configuración inicial para terminar de instalar correctamente SQL Server. Para ver la continuación del procedimiento para la configuración, vaya a la sección **Configuración de Servicios: SQL Server 2025, sección 1.**
-<br><br>}
+<br><br>
 
 ---
 ### Node.js y npm
@@ -144,7 +144,7 @@ Si se muestran sus números de versión, significa que fueron instalados exitosa
 
 **3. Instalar Express y mssql:**
 
-**3.1.** Crear la base de archivos Node.js
+**3.1.** Crear la base de archivos Node.js:
 
 En primer lugar, se crea un directorio para los archivos de Node.js y luego se entra en ese directorio. En mi caso, se llamará Codigo:
 ```bash
@@ -249,10 +249,8 @@ Para que la aplicación pueda cargar las variables almacenadas en el archivo .en
 ```bash
 npm install dotenv
 ```
-Para ver la continuación del procedimiento para la creación y uso del archivo .env, vaya a la sección **Configuración de Servicios: SQL Server 2025, sección 5.**
-<br>
-
-
+Para ver la continuación del procedimiento de la creación y uso del archivo .env, vaya a la sección **Configuración de Servicios: SQL Server 2025, sección 5.**
+<br><br><br>
 
 
 ## Configuración de los servicios
@@ -305,9 +303,8 @@ Efectivamente, sí está funcionando:
 ```
 Active: active (running) since Mon 2026-09-14 08:34:48 CST; 4min 59s ago
 ```
-
----
 <br><br>
+
 
 **2.** Instalar las herramientas de línea de comandos  
 Para crear una base de datos, se necesitan las herramientas `sqlcmd` y `bcp` para que sea posible ejecutar instrucciones Transact-SQL en SQL Server.
@@ -343,13 +340,13 @@ sudo apt install mssql-tools18 unixodbc-dev
 
 Cuando se ejecuta este comando, se muestra la siguiente interfaz en la terminal de Ubuntu:
 
-FOTO
+<img width="1330" height="663" alt="Captura de pantalla 2026-09-14 103247" src="https://github.com/user-attachments/assets/c6420653-88fe-4400-ba69-cc7573f2a3cd" />
 
 Significa que se está configurando el controlador ODBC 18 de Microsoft para SQL Server y se solicita aceptar los términos de licencia. Se selecciona `<Yes>`.
 
 Seguidamente, se muestra otra interfaz solicitando aceptar los términos de licencia de `mssql-tools18`. Deben aceptarse para continuar con la instalación.
 
-FOTO
+<img width="1327" height="672" alt="Captura de pantalla 2026-09-14 104022" src="https://github.com/user-attachments/assets/cfb0c850-f31d-4ce3-a2b4-6faeee9da566" />
 
 Después de esto, termina la instalación.
 <br><br><br>
@@ -404,7 +401,7 @@ sudo cp /mnt/c/Users/NOMBRE_USUARIO/Downloads/AdventureWorks2025.bak /var/opt/ms
 Se debe sustituir `NOMBRE_USUARIO` por el nombre real del usuario en Windows.
 <br><br><br>
 
-**3.3** Conectarse al SQL Server:
+**3.3** Conectarse al SQL Server:  
 Se procede a entrar al motor para poder restaurar la base de datos. Se ejecuta el comando:
 ```bash
 sqlcmd -S localhost -U sa -C
@@ -468,7 +465,7 @@ Changed database context to 'AdventureWorks'.
   CREATE_PROCEDURE - dbo.sp_ProductionLocation_actualizar
   CREATE_PROCEDURE - dbo.sp_ProductionLocation_eliminar
 ```
-<br><br>
+<br>
 
 **5.** Crear y usar el archivo .env para acceder a SQL Server:  
 En la raíz del directorio donde se encuentran los ficheros JavaScript (en mi caso, la carpeta Codigo que fue creada previamente), se creó con anterioridad el archivo .env. Dentro del archivo, se colocaron las siguientes variables:
@@ -551,3 +548,56 @@ Para solucionarlo, se debe especificar "type": "module" en el archivo package.js
   "type": "module"
 }
 ```
+<br>
+
+
+## Datos de prueba
+
+### Buscar una ubicación por ID  
+Se utiliza el método GET en la siguiente ruta de ejemplo:
+- http://localhost:3000/api/location/id/1
+
+El valor 1 corresponde al LocationID de la ubicación que se desea consultar.
+<br><br>
+
+### Buscar una ubicación por nombre
+Se utiliza el método GET en la siguiente ruta de ejemplo:
+- http://localhost:3000/api/location/name/Almacén
+
+El valor Almacén corresponde al texto utilizado para buscar coincidencias en el nombre de la ubicación.
+<br><br>
+
+### Insertar una nueva ubicación  
+Se utiliza el método POST en la siguiente ruta:
+- http://localhost:3000/api/location/
+
+En el cuerpo de la solicitud se envían los datos en formato JSON. Ejemplo:
+```json
+{
+    "Name": "Almacén Guápiles",
+    "CostRate": 10.50,
+    "Availability": 95.00
+}
+```
+<br>
+
+### Actualizar una ubicación
+Se utiliza el método PUT en la siguiente ruta de ejemplo:
+- http://localhost:3000/api/location/id/1
+
+El LocationID indicado en la URL determina el registro que será modificado.  
+Los nuevos valores se envían en formato JSON. Ejemplo:
+```json
+{
+    "Name": "Almacén Limón Centro",
+    "CostRate": 12.50,
+    "Availability": 90.00
+}
+```
+<br>
+
+### Eliminar una ubicación
+Se utiliza el método DELETE en la siguiente ruta de ejemplo:
+- http://localhost:3000/api/location/id/1
+
+El LocationID indicado en la URL determina el registro que será eliminado.
